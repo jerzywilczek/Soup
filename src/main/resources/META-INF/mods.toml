@@ -7,7 +7,7 @@ loaderVersion="[36,)"
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license="The Unlicense"
 # A URL to refer people to when problems occur with this mod
-issueTrackerURL=""
+issueTrackerURL="https://github.com/jerzywilczek/Soup/issues"
 # If the mods defined in this file should show as separate resource packs
 showAsResourcePack=false
 
@@ -16,9 +16,9 @@ modId="soup"
 version="${file.jarVersion}"
 displayName="Soup Mod"
 updateJSONURL=""
-displayURL=""
+displayURL="https://github.com/jerzywilczek/Soup"
 logoFile=""
-credits="dupa"
+credits="I would like to thank my mum, who makes the best soup in the world."
 authors="xXx_J_E_R_Z_Y_xXx"
 description='''
       The Soup Mod
