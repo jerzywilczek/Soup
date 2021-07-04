@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "soup:iron_soup_warm"
+    ]
+  },
+  "criteria": {
+    "has_iron_soup": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "soup:iron_soup"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "soup:iron_soup_warm"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_soup",
+      "has_the_recipe"
+    ]
+  ]
+}

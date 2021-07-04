@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "soup:iron_soup"
+  },
+  "result": "soup:iron_soup_warm",
+  "experience": 1.0,
+  "cookingtime": 100
+}

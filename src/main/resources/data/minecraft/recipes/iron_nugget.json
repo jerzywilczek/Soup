@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "soup:iron_in_bowl"
+    }
+  ],
+  "result": {
+    "item": "minecraft:iron_nugget",
+    "count": 18
+  }
+}
