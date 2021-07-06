@@ -1,5 +1,7 @@
 package xxxjerzyxxx.soup.common.items;
 
+import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,13 +12,23 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
 
 public class StackableSoupItem extends Item {
-    IItemProvider remainder;
+    private final List<Pair<IItemProvider, Integer>> remainders;
+
+    public StackableSoupItem(Properties properties, List<Pair<IItemProvider, Integer>> remainders){
+        super(properties);
+        this.remainders = ImmutableList.copyOf(remainders);
+    }
 
     public StackableSoupItem(Properties properties, IItemProvider remainder) {
-        super(properties);
-        this.remainder = remainder;
+        this(properties, remainder, 1);
+    }
+
+    public StackableSoupItem(Properties properties, IItemProvider remainder, int remainderAmount){
+        this(properties, ImmutableList.of(Pair.of(remainder, remainderAmount)));
     }
 
     @Override
@@ -29,10 +41,13 @@ public class StackableSoupItem extends Item {
                 stack.setCount(stack.getCount() - 1);
             }
 
-
-            ItemEntity itemEntity = new ItemEntity(world, player.position().x, player.position().y, player.position().z, new ItemStack(remainder));
+        for(Pair<IItemProvider, Integer> pair : remainders){
+            ItemEntity itemEntity = new ItemEntity(world, player.position().x, player.position().y, player.position().z,
+                    new ItemStack(pair.getFirst(), pair.getSecond()));
             itemEntity.setNoPickUpDelay();
             world.addFreshEntity(itemEntity);
+        }
+
 
         }
         return stack;

@@ -1,5 +1,7 @@
 package xxxjerzyxxx.soup.common.items;
 
+import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -26,8 +28,11 @@ public class ItemRegisterer {
     public static final RegistryObject<Item> IRON_SOUP = ITEMS.register("iron_soup", () -> new StackableSoupItem(
             new Item.Properties()
                     .tab(Soup.group)
-                    .food(new Food.Builder().nutrition(4).saturationMod(0.3f).build()),
-            Items.IRON_ORE
+                    .food(new Food.Builder().nutrition(4).saturationMod(0.3f).alwaysEat().build()),
+            ImmutableList.of(
+                    Pair.of(Items.IRON_ORE, 1),
+                    Pair.of(Items.BOWL, 1)
+            )
     ));
 
 //    BlockItems
