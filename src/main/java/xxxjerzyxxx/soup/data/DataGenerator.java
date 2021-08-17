@@ -3,7 +3,7 @@ package xxxjerzyxxx.soup.data;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import xxxjerzyxxx.soup.Soup;
 import xxxjerzyxxx.soup.data.generators.client.BlockStateGenerator;
 import xxxjerzyxxx.soup.data.generators.client.ItemModelGenerator;

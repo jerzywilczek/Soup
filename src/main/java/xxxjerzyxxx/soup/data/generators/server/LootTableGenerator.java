@@ -2,17 +2,21 @@ package xxxjerzyxxx.soup.data.generators.server;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.LootTableProvider;
-import net.minecraft.data.loot.BlockLootTables;
-import net.minecraft.loot.*;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import xxxjerzyxxx.soup.common.blocks.BlockRegisterer;
 
-import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -20,25 +24,25 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class LootTableGenerator extends LootTableProvider {
     public LootTableGenerator(DataGenerator gen) {
         super(gen);
     }
 
     @Override
-    @Nonnull
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
-        return ImmutableList.of(Pair.of(Blocks::new, LootParameterSets.BLOCK));
+    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
+        return ImmutableList.of(Pair.of(Blocks::new, LootContextParamSets.BLOCK));
     }
 
-    private static class Blocks extends BlockLootTables{
+    private static class Blocks extends BlockLoot {
         @Override
         protected void addTables() {
             this.dropSelf(BlockRegisterer.MUSHROOM_STEW_BLOCK.get());
         }
 
         @Override
-        @Nonnull
         protected Iterable<Block> getKnownBlocks() {
             return BlockRegisterer.BLOCKS.getEntries()
                     .stream()
@@ -48,7 +52,7 @@ public class LootTableGenerator extends LootTableProvider {
     }
 
     @Override
-    protected void validate(@Nonnull Map<ResourceLocation, LootTable> map, @Nonnull ValidationTracker validationtracker) {
-        map.forEach((name, table) -> LootTableManager.validate(validationtracker, name, table));
+    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationTracker) {
+        map.forEach((name, table) -> LootTables.validate(validationTracker, name, table));
     }
 }
